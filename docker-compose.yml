@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+ py3:
+   build:
+     context: .
+     dockerfile: ./Dockerfile
+#volumes must be abspath 
+   volumes:
+     - "/home/tomoki:/home/tomoki/jupyterlab/py3/working"
+
+   ports:
+     - "8888:8888"
+
+   tty: true
+
+   #command: jupyter notebook --ip="0.0.0.0" --notebook-dir=./working --allow-root
+
+   deploy:
+    resources:
+     reservations:
+      devices:
+       - driver: nvidia
+         count: all
+         capabilities: [gpu]
+
