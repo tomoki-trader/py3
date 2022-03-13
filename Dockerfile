@@ -28,13 +28,16 @@ WORKDIR ./working
 
 RUN pip3 install ipywidgets 
 RUN pip3 install jupyterlab 
-RUN pip3 install jupyter
+RUN pip3 --no-cache-dir install jupyter
 
 #RUN jupyter nbextension enable --py --sys-prefix widgetsnbextension 
 #RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
 
 COPY jupyter_notebook_config.py /root/.jupyter/
 
-#USER root
-#RUN chown -R tomoki .
+#jupyternotebookを利用しているディレクトリの権限を変更
+USER root
+RUN chown -R tomoki .
+#USERをtomokiに変えることでjupyter-coreコマンドを利用可能に。
+USER $USERNAME
 #heyhey 2
