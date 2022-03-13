@@ -6,14 +6,18 @@ services:
      dockerfile: ./Dockerfile
 #volumes must be abspath 
    volumes:
-     - "/home/tomoki:/home/tomoki/jupyterlab/py3/working"
-
+     - "/home/tomoki/:/home/tomoki/py3/working"
+     - ".:/home/tomoki/py3/working"
+     - "/usr/lib/python3/dist-packages:/home/tomoki/py3/working"
+  
    ports:
      - "8888:8888"
 
    tty: true
 
-   #command: jupyter notebook --ip="0.0.0.0" --notebook-dir=./working --allow-root
+   env_file: my_env_file.env
+
+   command: jupyter notebook --no-browser --ip=0.0.0.0 --notebook-dir=. --allow-root --NorebookApp.token=''
 
    deploy:
     resources:

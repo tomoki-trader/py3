@@ -28,10 +28,13 @@ WORKDIR ./working
 
 RUN pip3 install ipywidgets 
 RUN pip3 install jupyterlab 
+RUN pip3 install jupyter
 
 #RUN jupyter nbextension enable --py --sys-prefix widgetsnbextension 
 #RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
 
 COPY jupyter_notebook_config.py /root/.jupyter/
 
+#USER root
+#RUN chown -R tomoki .
 #heyhey 2
