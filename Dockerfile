@@ -35,6 +35,7 @@ WORKDIR ./working
 #WEOKDIRの指定によって'.'の値が変更されている！！
 
 
+
 #RUN apt-get update 
 
 #RUN pip3 install --user -r ./config.txt -f https://download.pytorch.org/whl/cu115/torch_stable.html
@@ -43,16 +44,23 @@ RUN pip3 install ipywidgets
 RUN pip3 install jupyterlab 
 RUN pip3 --no-cache-dir install jupyter
 
+
 #RUN jupyter nbextension enable --py --sys-prefix widgetsnbextension 
 #RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
 
-COPY jupyter_notebook_config.py /root/.jupyter/
+#COPY jupyter_notebook_config.py /root/.jupyter/
 
 
 #jupyternotebookを利用しているディレクトリの権限を変更
 USER root
 RUN chown -R tomoki .
+RUN apt-get -y update
+RUN apt-get -y install xdg-utils
 #USERをtomokiに変えることでjupyter-coreコマンドを利用可能に。
 USER $UNAME
 #CMD bash -E /etc/entrypoint.sh && /bin/bash
-#heyhey 2
+RUN mkdir /home/tomoki/.jupyter
+
+
+
+

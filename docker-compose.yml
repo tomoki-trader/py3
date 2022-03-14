@@ -13,6 +13,9 @@ services:
 #volumes must be abspath 
    volumes:
      - "/home/tomoki/py3/data:/workspace/working"
+     - "/home/tomoki/.jupyter/:/home/tomoki/.jupyter"
+   
+   container_name: py3
   
    ports:
      - "8888:8888"
@@ -21,7 +24,10 @@ services:
 
    env_file: my_env_file.env
 
-   command: jupyter notebook --no-browser --ip=0.0.0.0 --notebook-dir=. --allow-root --NorebookApp.token='' 
+   command: >
+    jupyter notebook --no-browser --ip=0.0.0.0 --notebook-dir=. --allow-root --NorebookApp.token='tomoki'  
+    
+
 
    deploy:
     resources:
