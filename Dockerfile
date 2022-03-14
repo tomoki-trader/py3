@@ -15,7 +15,7 @@ RUN groupadd -g $GID $GROUPNAME && \
 USER $USERNAME
 
 WORKDIR .
-COPY ./config.txt ./working/ 
+#COPY ./config.txt ./working/ 
 #COPYにカレントディレクトリ’.’が入っているほうが良い。（ADDも同様）
 #copy先の書き方注意
 WORKDIR ./working
@@ -35,9 +35,11 @@ RUN pip3 --no-cache-dir install jupyter
 
 COPY jupyter_notebook_config.py /root/.jupyter/
 
+
 #jupyternotebookを利用しているディレクトリの権限を変更
 USER root
 RUN chown -R tomoki .
 #USERをtomokiに変えることでjupyter-coreコマンドを利用可能に。
 USER $USERNAME
+CMD bash -E /etc/entrypoint.sh && /bin/bash
 #heyhey 2

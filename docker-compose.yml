@@ -6,9 +6,7 @@ services:
      dockerfile: ./Dockerfile
 #volumes must be abspath 
    volumes:
-     - "/home/tomoki/:/home/tomoki/py3/working"
-     - ".:/home/tomoki/py3/working"
-     - "/usr/lib/python3/dist-packages:/home/tomoki/py3/working"
+     - "/home/tomoki/py3/data:/workspace/working"
   
    ports:
      - "8888:8888"
