@@ -1,9 +1,15 @@
 version: '3.9'
 services:
  py3:
+   user: $UID:$GID
    build:
      context: .
      dockerfile: ./Dockerfile
+     args:
+       UID: $UID
+       GID: $GID
+       UNAME: $UNAME
+
 #volumes must be abspath 
    volumes:
      - "/home/tomoki/py3/data:/workspace/working"
@@ -15,7 +21,7 @@ services:
 
    env_file: my_env_file.env
 
-   command: jupyter notebook --no-browser --ip=0.0.0.0 --notebook-dir=. --allow-root --NorebookApp.token=''
+   command: jupyter notebook --no-browser --ip=0.0.0.0 --notebook-dir=. --allow-root --NorebookApp.token='' 
 
    deploy:
     resources:
